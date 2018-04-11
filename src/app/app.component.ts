@@ -1,22 +1,34 @@
+import { AdminPage } from './../pages/admin/admin';
+import { UsuarioPage } from './../pages/usuario/usuario';
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+import { TabsPage, HomePage }  from '../pages/index.paginas';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  usuario: any = UsuarioPage;
+  admin: any = AdminPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  rootPage:any = TabsPage;
+
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuCtrl: MenuController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+
+  abrirPagina( pagina: any ) {
+    this.rootPage = pagina;
+    this.menuCtrl.close();
+    console.log('menu close');
   }
 }
 
