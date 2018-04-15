@@ -24,7 +24,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.storage.get('usuario').then((val) => {
-        console.log(val);        
+        console.log('get usuario',val);        
         
         if (val === '') {
           this.rootPage = UsuarioPage;
