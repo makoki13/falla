@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 
 import { CalendarioPage, ChatPage, FotosPage, GeoPage, HomePage, TabsPage, UsuarioPage, AdminPage } from '../pages/index.paginas';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,11 @@ import { CalendarioPage, ChatPage, FotosPage, GeoPage, HomePage, TabsPage, Usuar
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

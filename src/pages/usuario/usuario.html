@@ -6,6 +6,23 @@
 
 <ion-content padding>
   <ion-content padding>
-    <button ion-button color="secondary" block (click)="atras()">Inicio</button>
+      <ion-row>
+          <ion-col>
+            <ion-list inset class="no-border">
+              <ion-item>
+                <ion-label>Usuario</ion-label>
+                <ion-input type="text" #user (keypress)="controlNameKeypress($event);" (keyup)="testUsuario();" placeholder="Introduce tu nombre (mínimo 3 caracteres"></ion-input>                
+                <ion-icon [name]="imgUser" class="icono" item-right></ion-icon>
+              </ion-item> 
+              <ion-item>
+                  <div class="row">
+                      <div class="col text-center">
+                        <button ion-button clear (click)="registra()" #boton id="boton" class="register-button" [disabled]="!verificaFormulario()">Registrar</button>          
+                      </div>
+                  </div>
+              </ion-item>             
+            </ion-list>
+          </ion-col>
+        </ion-row>
   </ion-content>
 </ion-content>
