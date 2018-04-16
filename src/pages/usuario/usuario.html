@@ -10,8 +10,8 @@
           <ion-col>
             <ion-list inset class="no-border">
               <ion-item>
-                <ion-label>Usuario</ion-label>
-                <ion-input type="text" #user (keypress)="controlNameKeypress($event);" (keyup)="testUsuario();" placeholder="Introduce tu nombre (mínimo 3 caracteres"></ion-input>                
+                <ion-label floating>Usuario</ion-label>
+                <ion-input type="text" #user (keypress)="controlNameKeypress($event);" (keyup)="testUsuario();" placeholder="Mínimo 3 caracteres"></ion-input>                
                 <ion-icon [name]="imgUser" class="icono" item-right></ion-icon>
               </ion-item> 
               <ion-item>
