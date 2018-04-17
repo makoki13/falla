@@ -29,6 +29,7 @@ import { MyApp } from './app.component';
 
 import { CalendarioPage, ChatPage, FotosPage, GeoPage, HomePage, TabsPage, UsuarioPage, AdminPage, SubirPage } from '../pages/index.paginas';
 import { IonicStorageModule } from '@ionic/storage';
+import { CargaArchivoProvider } from '../providers/carga-archivo/carga-archivo';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AngularFireDatabase,
     Camera,
     ImagePicker,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CargaArchivoProvider
   ]
 })
 export class AppModule {}
