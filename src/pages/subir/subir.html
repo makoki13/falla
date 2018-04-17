@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar color="danger">
+    <ion-buttons left>
+      <button ion-button (click)="cerrar_modal()">Cerrar</button>
+    </ion-buttons>
+    <ion-title>{{ titulo | placeHolder:'Enviar nueva foto' }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input type="text" [(ngModel)]="titulo"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="imagePreview">
+      <img [src]="imagePreview">
+    </ion-item>
+  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button class="btnSeleccion" ion-button block icon-left color="naranja" (click)="seleccionar_foto()"><ion-icon name="photos"></ion-icon>Seleccionar</button>
+      </ion-col>
+      <ion-col>
+        <button class="btnSeleccion" ion-button block icon-left color="naranja" (click)="mostrar_camara()"><ion-icon name="camera"></ion-icon>Camara</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

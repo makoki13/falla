@@ -6,3 +6,4 @@ export { HomePage } from './home/home';
 export { TabsPage } from './tabs/tabs';
 export { UsuarioPage } from './usuario/usuario';
 export { AdminPage }  from './admin/admin';
+export { SubirPage } from '../pages/subir/subir';

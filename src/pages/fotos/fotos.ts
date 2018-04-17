@@ -1,25 +1,26 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+import { SubirPage } from '../subir/subir';
 
-/**
- * Generated class for the FotosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
-@IonicPage()
+
 @Component({
   selector: 'page-fotos',
-  templateUrl: 'fotos.html',
+  templateUrl: 'fotos.html'
 })
 export class FotosPage {
+  posts: Observable<any[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private modalCtrl: ModalController,  private afDB: AngularFireDatabase) {
+    this.posts = afDB.list('post').valueChanges();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FotosPage');
+  mostrar_modal() {
+    let modal = this.modalCtrl.create ( SubirPage );
+    modal.present();
   }
 
 }
+
