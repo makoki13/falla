@@ -4,6 +4,9 @@ import { ToastController } from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+
+import 'rxjs/add/operator/map';
+
 import { UploadTask } from '@firebase/storage-types';
 import { updateDate } from 'ionic-angular/util/datetime-util';
 
@@ -11,9 +14,48 @@ import { updateDate } from 'ionic-angular/util/datetime-util';
 export class CargaArchivoProvider {
 
   imagenes: ArchivoSubir[] = [];
+  lastKey: string = null;
 
   constructor( public toastCtrl: ToastController, public afdb: AngularFireDatabase ) {
-    console.log('Hello CargaArchivoProvider Provider');
+    this.cargar_ultimo_key().subscribe( () => this.cargar_imagenes());
+  }
+
+  private cargar_ultimo_key() {
+    return this.afdb.list('/post/', ref => ref.orderByKey().limitToLast(1) )
+      .valueChanges()
+      .map( (post:any) => {
+        console.log( post );
+        this.lastKey = post[0].key;
+
+        this.imagenes.push( post[0] );
+      })
+  }
+
+  cargar_imagenes() {
+    return new Promise( (resolve, reject) => {
+      this.afdb.list('/post',
+        ref => ref.limitToLast(3)
+          .orderByKey()
+          .endAt( this.lastKey )
+      ).valueChanges()
+      .subscribe( (posts:any) => {
+        posts.pop();
+        if (posts.length === 0) {
+          console.log( 'Ya no hay más registros' );
+          resolve(false);
+          return;
+        }
+
+        this.lastKey = posts[0].key;
+
+        for (let i = posts.length -1; i>=0; i--) {
+          let post = posts[i];
+          this.imagenes.push( post ) ;
+        }
+
+        resolve(true);
+      })
+    });
   }
 
   cargar_imagen_firebase( archivo: ArchivoSubir ) {
